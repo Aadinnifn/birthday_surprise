@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Pritii ❤️</title>
+    
+    <!-- Meta tags for SEO & standard mobile rendering -->
+    <meta name="description" content="A special birthday surprise website for Pritii, crafted with love by Adarsh.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Animate On Scroll (AOS) CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ==================== BACKGROUND AUDIO & FLOATING CONTROLS ==================== -->
+    <audio id="bg-music" src="assets/music/birthday.mpeg" loop></audio>
+    <div class="music-controls" id="music-widget">
+        <button id="btn-play-pause" title="Play/Pause Music">
+            <i class="fa-solid fa-music music-note-animated"></i>
+        </button>
+        <button id="btn-volume" title="Mute/Unmute">
+            <i class="fa-solid fa-volume-high"></i>
+        </button>
+    </div>
+
+    <!-- ==================== LOADING SCREEN ==================== -->
+    <div id="loader" class="loader-container">
+        <div class="loader-content">
+            <div class="heart-pulse-loader">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <h2 class="loader-text">Creating Magic...</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="load-progress"></div>
+            </div>
+            <div class="progress-percent" id="load-percent">0%</div>
+        </div>
+    </div>
+
+    <!-- ==================== PASSWORD SCREEN ==================== -->
+    <div id="password-screen" class="password-container hidden-screen">
+        <div class="glass-card password-card">
+            <div class="heart-lock-icon">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <h1 class="pass-title">Enter Secret Key</h1>
+            <p class="pass-desc">To unlock a world of love, enter the number of months we have spent together (or our special key) ❤️</p>
+            
+            <div class="input-group">
+                <input type="password" id="pass-input" placeholder="Enter key..." maxlength="4" autocomplete="off">
+                <span class="focus-border"></span>
+            </div>
+            
+            <button id="btn-unlock" class="btn-primary">
+                Unlock Surprise <i class="fa-solid fa-heart-open"></i>
+            </button>
+            <p id="error-msg" class="error-text"></p>
+        </div>
+    </div>
+
+    <!-- ==================== COUNTDOWN OVERLAY ==================== -->
+    <div id="countdown-overlay" class="countdown-container hidden-screen">
+        <div class="countdown-number" id="countdown-text">3</div>
+    </div>
+
+    <!-- ==================== MAIN APPLICATION CONTAINER ==================== -->
+    <div id="main-content" class="hidden-screen">
+
+        <!-- ==================== HOME SECTION ==================== -->
+        <section id="home-section" class="full-screen-sec">
+            <div class="floating-container" id="hearts-generator"></div>
+            <div class="hero-content">
+                <span class="hero-badge" data-aos="fade-down" data-aos-duration="1200">Our Special Day ✨</span>
+                <h1 class="hero-title" data-aos="zoom-out" data-aos-duration="1500" data-aos-delay="200">
+                    Happy Birthday<br><span class="highlight-text">Pritii</span> ❤️
+                </h1>
+                <p class="hero-subtext" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500">
+                    Forever Yours, <span class="sender-name">Adarsh</span> ❤️
+                </p>
+                
+                <div class="scroll-down-hint" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+                    <button id="btn-start-surprise" class="btn-primary pulse-effect">
+                        Start The Surprise <i class="fa-solid fa-circle-play"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== LOVE LETTER SECTION ==================== -->
+        <section id="letter-section" class="scroll-sec">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-subtitle">A Message From My Heart</span>
+                    <h2 class="section-title">My Love Letter To You</h2>
+                </div>
+                
+                <div class="letter-wrapper" data-aos="fade-up" data-aos-delay="200">
+                    <div class="letter-paper">
+                        <div class="letter-lines">
+                            <span id="typed-letter-content"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-footer-action" data-aos="fade-up">
+                    <button id="btn-read-gallery" class="btn-primary">
+                        View Our Memories <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PHOTO GALLERY SECTION ==================== -->
+        <section id="gallery-section" class="scroll-sec">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-subtitle">Beautiful Moments</span>
+                    <h2 class="section-title">A Journey in Pictures</h2>
+                </div>
+                
+                <!-- 12 Responsive Images Grid -->
+                <div class="gallery-grid">
+                    <!-- Photo 1 -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="image-box">
+                            <img src="assets/images/Photo1.jpg" alt="Pritii & Adarsh Memory 1" class="gallery-img">
+                            <div class="img-overlay">
+                                <span class="zoom-icon"><i class="fa-solid fa-expand"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photo 2 -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="150">
+                        <div class="image-box">
+                            <img src="assets/images/Photo2.jpg" alt="Pritii & Adarsh Memory 2" class="gallery-img">
+                            <div class="img-overlay">
+                                <span class="zoom-icon"><i class="fa-solid fa-expand"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photo 3 -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="image-box">
+                            <img src="assets/images/Photo3.jpg" alt="Pritii & Adarsh Memory 3" class="gallery-img">
+                            <div class="img-overlay">
+                                <span class="zoom-icon"><i class="fa-solid fa-expand"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photo 4 -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="250">
+                        <div class="image-box">
+                            <img src="assets/images/Photo4.jpeg" alt="Pritii & Adarsh Memory 4" class="gallery-img">
+                            <div class="img-overlay">
+                                <span class="zoom-icon"><i class="fa-solid fa-expand"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photo 5 -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="image-box">
+                            <img src="assets/images/Photo5.jpeg" alt="Pritii & Adarsh Memory 5" class="gallery-img">
+                            <div class="img-overlay">
+                                <span class="zoom-icon"><i class="fa-solid fa-expand"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photo 6 -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="150">
+                        <div class="image-box">
+                            <img src="assets/images/Photo6.jpeg" alt="Pritii & Adarsh Memory 6" class="gallery-img">
+                            <div class="img-overlay">
+                                <span class="zoom-icon"><i class="fa-solid fa-expand"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photo 7 -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="image-box">
+                            <img src="assets/images/Photo7.jpeg" alt="Pritii & Adarsh Memory 7" class="gallery-img">
+                            <div class="img-overlay">
+                                <span class="zoom-icon"><i class="fa-solid fa-expand"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photo 8 -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="250">
+                        <div class="image-box">
+                            <img src="assets/images/Photo8.jpeg" alt="Pritii & Adarsh Memory 8" class="gallery-img">
+                            <div class="img-overlay">
+                                <span class="zoom-icon"><i class="fa-solid fa-expand"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photo 9 -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="image-box">
+                            <img src="assets/images/Photo9.jpeg" alt="Pritii & Adarsh Memory 9" class="gallery-img">
+                            <div class="img-overlay">
+                                <span class="zoom-icon"><i class="fa-solid fa-expand"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photo 10 -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="150">
+                        <div class="image-box">
+                            <img src="assets/images/Photo10.jpeg" alt="Pritii & Adarsh Memory 10" class="gallery-img">
+                            <div class="img-overlay">
+                                <span class="zoom-icon"><i class="fa-solid fa-expand"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photo 11 -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="image-box">
+                            <img src="assets/images/Photo11.jpeg" alt="Pritii & Adarsh Memory 11" class="gallery-img">
+                            <div class="img-overlay">
+                                <span class="zoom-icon"><i class="fa-solid fa-expand"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photo 12 -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="250">
+                        <div class="image-box">
+                            <img src="assets/images/Photo12.jpeg" alt="Pritii & Adarsh Memory 12" class="gallery-img">
+                            <div class="img-overlay">
+                                <span class="zoom-icon"><i class="fa-solid fa-expand"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-footer-action" data-aos="fade-up">
+                    <button id="btn-read-reasons" class="btn-primary">
+                        Why I Love You <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== LIGHTBOX CONTAINER ==================== -->
+        <div id="lightbox" class="lightbox-overlay">
+            <span class="lightbox-close" id="lightbox-close-btn">&times;</span>
+            <button class="lightbox-nav prev" id="lightbox-prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="lightbox-content">
+                <img id="lightbox-img" src="" alt="Zoomed view">
+            </div>
+            <button class="lightbox-nav next" id="lightbox-next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+        <!-- ==================== REASONS SECTION ==================== -->
+        <section id="reasons-section" class="scroll-sec">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-subtitle">Endless Reasons</span>
+                    <h2 class="section-title">Why I Love You</h2>
+                </div>
+                
+                <!-- Reasons Cards Grid -->
+                <div class="reasons-grid">
+                    <!-- Reason 1 -->
+                    <div class="glass-card reason-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                        <h3>Your Beautiful Smile</h3>
+                        <p>The way your entire face lights up when you laugh, bringing sunshine to even my darkest days.</p>
+                    </div>
+                    <!-- Reason 2 -->
+                    <div class="glass-card reason-card" data-aos="fade-up" data-aos-delay="150">
+                        <div class="card-icon"><i class="fa-solid fa-face-smile-wink"></i></div>
+                        <h3>Your Kind Soul</h3>
+                        <p>Your empathy, gentleness, and the pure, caring way you handle everyone and everything around you.</p>
+                    </div>
+                    <!-- Reason 3 -->
+                    <div class="glass-card reason-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-icon"><i class="fa-solid fa-comments"></i></div>
+                        <h3>Our Late Night Chats</h3>
+                        <p>How we can talk for hours about absolute nonsense or share our deepest vulnerabilities without judgment.</p>
+                    </div>
+                    <!-- Reason 4 -->
+                    <div class="glass-card reason-card" data-aos="fade-up" data-aos-delay="250">
+                        <div class="card-icon"><i class="fa-solid fa-handshake-angle"></i></div>
+                        <h3>You Make Me Better</h3>
+                        <p>How you challenge, support, and inspire me to grow into the best version of myself every single day.</p>
+                    </div>
+                    <!-- Reason 5 -->
+                    <div class="glass-card reason-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-icon"><i class="fa-solid fa-face-laugh-beam"></i></div>
+                        <h3>Your Silly Side</h3>
+                        <p>The cute, dorky things you do when you are completely yourself around me. It is absolutely adorable.</p>
+                    </div>
+                    <!-- Reason 6 -->
+                    <div class="glass-card reason-card" data-aos="fade-up" data-aos-delay="350">
+                        <div class="card-icon"><i class="fa-solid fa-infinity"></i></div>
+                        <h3>You are My Safe Haven</h3>
+                        <p>In a loud and busy world, holding your hand or hearing your voice brings instant peace and calm.</p>
+                    </div>
+                </div>
+
+                <div class="section-footer-action" data-aos="fade-up">
+                    <button id="btn-go-to-cake" class="btn-primary">
+                        Let's Celebrate <i class="fa-solid fa-cake-candles"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CAKE CUTTING SECTION ==================== -->
+        <section id="cake-section" class="scroll-sec">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-subtitle">Make a Wish</span>
+                    <h2 class="section-title">Time to Blow the Candles!</h2>
+                </div>
+                
+                <div class="cake-container" data-aos="zoom-in" data-aos-duration="1000">
+                    <!-- Wish Instructions overlay -->
+                    <div id="wish-instruction" class="wish-banner">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Click on the candle flame to blow it out!
+                    </div>
+                    
+                    <!-- Cake Wrapper -->
+                    <div class="cake-wrapper">
+                        <!-- Candles -->
+                        <div class="candle" id="candle-1">
+                            <div class="flame" id="flame-1"></div>
+                            <div class="smoke" id="smoke-1"></div>
+                            <div class="wick"></div>
+                            <div class="candle-body"></div>
+                        </div>
+                        
+                        <!-- Cake Body -->
+                        <div class="cake">
+                            <!-- Frosting Layers -->
+                            <div class="cake-frosting-top">
+                                <span class="drip drip-1"></span>
+                                <span class="drip drip-2"></span>
+                                <span class="drip drip-3"></span>
+                                <span class="drip drip-4"></span>
+                                <span class="drip drip-5"></span>
+                            </div>
+                            <div class="cake-layer cake-layer-top"></div>
+                            <div class="cake-layer cake-layer-middle"></div>
+                            <div class="cake-layer cake-layer-bottom"></div>
+                            
+                            <!-- Plate -->
+                            <div class="cake-plate"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cake-actions" data-aos="fade-up">
+                    <button id="btn-cut-cake" class="btn-primary" disabled>
+                        Cut the Cake <i class="fa-solid fa-knife"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== GIFT BOX SECTION ==================== -->
+        <section id="gift-section" class="scroll-sec">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-subtitle">For You, My Love</span>
+                    <h2 class="section-title">Unwrap Your Special Gift</h2>
+                </div>
+                
+                <div class="gift-container" data-aos="zoom-in" data-aos-duration="1000">
+                    <div class="gift-box" id="box-wrap">
+                        <!-- Gift Box Cap/Lid -->
+                        <div class="gift-lid" id="box-lid">
+                            <div class="ribbon-bow"></div>
+                            <div class="ribbon-horizontal"></div>
+                        </div>
+                        <!-- Gift Box Main Body -->
+                        <div class="gift-body" id="box-body">
+                            <div class="ribbon-vertical"></div>
+                            <!-- Revealed item -->
+                            <div class="gift-reveal-content" id="reveal-message">
+                                <i class="fa-solid fa-heart heart-beat-reveal"></i>
+                                <h3>I Give You My Whole Heart</h3>
+                                <p>Now and forever, it belongs to you.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-footer-action" data-aos="fade-up">
+                    <button id="btn-open-gift" class="btn-primary">
+                        Open Gift <i class="fa-solid fa-box-open"></i>
+                    </button>
+                    <button id="btn-go-final" class="btn-primary hidden-btn">
+                        See Fireworks <i class="fa-solid fa-sparkles"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FINAL CELEBRATION SECTION & FIREWORKS ==================== -->
+        <section id="final-section" class="full-screen-sec final-celebration-sec">
+            <!-- Fullscreen Canvas for Fireworks -->
+            <canvas id="fireworks-canvas"></canvas>
+            
+            <div class="final-card-container">
+                <div class="glass-card final-wishes-card" data-aos="zoom-in" data-aos-duration="1200">
+                    <div class="final-avatar">
+                        <i class="fa-solid fa-crown animated-crown"></i>
+                        <span class="avatar-heart"><i class="fa-solid fa-heart"></i></span>
+                    </div>
+                    
+                    <h1 class="final-title">Happy Birthday Pritii! ❤️</h1>
+                    <p class="final-paragraph">
+                        On this beautiful day, I want to remind you how deeply you are loved. May this year bring you endless laughter, joy, and all the dreams your beautiful heart desires.
+                    </p>
+                    
+                    <div class="divider"></div>
+                    
+                    <div class="signature">
+                        <p class="signature-note">Forever Yours,</p>
+                        <h2 class="signature-name">Adarsh ❤️</h2>
+                    </div>
+                    
+                    <button id="btn-replay" class="btn-secondary">
+                        Replay Surprise <i class="fa-solid fa-rotate-left"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+
+    <!-- ==================== FOOTER SCROLL TO TOP ==================== -->
+    <button id="scroll-to-top" title="Go to top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- ==================== EXTERNAL JS LIBRARIES ==================== -->
+    <!-- GSAP for Smooth animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- AOS for scroll triggers -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Typed.js for Typewriting letter -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <!-- Canvas Confetti for celebratory bursts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- Custom Application logic -->
+    <script src="script.js"></script>
+</body>
+</html>
